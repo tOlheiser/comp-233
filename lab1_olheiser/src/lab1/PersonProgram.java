@@ -59,9 +59,7 @@ public class PersonProgram {
     public void menuOption1() {
         // loop over the arrays and display data
         for (int i = 0; i < people.length; i++) {
-            //System.out.printf("%d. %s, %s %C.", i, people[i].getLastName, people[i].getFirstName, people[i].getMiddleInit);
-            System.out.println(i + ". " + people[i].getLastName() + ", " + 
-                    people[i].getFirstName() + " " + people[i].getMiddleInit() + ".");
+            System.out.println(i + ". " + people[i].getFullName());
         }
     }
     

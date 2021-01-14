@@ -69,7 +69,7 @@ public class Person {
     
     // Custom methods
     public String getFullName() {
-        String fullName = getFirstName() + " " + getMiddleInit() + " " + getLastName();
+        String fullName = getLastName() + ", " + getFirstName() + " " + getMiddleInit() + ".";
         return fullName;
     }
     
