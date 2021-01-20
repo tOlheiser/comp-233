@@ -11,7 +11,7 @@ import java.util.Scanner; // import scanner
  * @author Owner
  */
 public class PersonProgram {
-    public static Scanner input;
+    public static Scanner input;// = new Scanner(System.in);
     public static Person[] people; 
     
     public void PersonProgram() {
@@ -22,7 +22,7 @@ public class PersonProgram {
     public void getData() {
         // Declare and populate a Person array
         people = new Person[5];
-        people[0] = new Person("Smith", "John", 'T', "80/09/23");
+        people[0] = new Person("Smith", "John", 'T', "08/09/12");
         people[1] = new Person("Olheiser", "Tanner", 'C', "27/04/93");
         people[2] = new Person("Ketchum", "Ash", 'P', "01/02/94");
         people[3] = new Person("Labowski", "Big", 'Y', "03/04/80");
@@ -59,24 +59,24 @@ public class PersonProgram {
     public void menuOption1() {
         // loop over the arrays and display data
         for (int i = 0; i < people.length; i++) {
-            System.out.println(i + ". " + people[i].getFullName());
+            System.out.println((i + 1) + ". " + people[i].getFullName());
         }
     }
     
     public void menuOption2() {
         // Prompt and store user input
-        System.out.println("Please enter a number between 1 and " + people.length);
+        System.out.print("Please enter a number between 1 and " + people.length);
         int userChoice = input.nextInt() - 1;
         
         // display user info
-        System.out.println("Person Data");
+        System.out.println("\nPerson Data");
         System.out.println("Full Name: " + people[userChoice].getFullName());
         System.out.println("Birth Date: " + people[userChoice].getBirthDate());
     }
     
     public void menuOption3() {
         // Prompt for a user to edit
-        System.out.println("Please enter a number between 1 and " + people.length);
+        System.out.print("Please enter a number between 1 and " + people.length);
         int userChoice = input.nextInt() - 1;
         
         // Display a submenu
@@ -112,8 +112,15 @@ public class PersonProgram {
     }
     
     public void main(String[] args) {
-        getData();
-        executeChoices();
+        /*
+        I think in the main method, you should create an instance of class PersonProgram, then get access to method getData()
+        */
+        
+        /*PersonProgram ThePerson = new PersonProgram();
+        ThePerson.getData();
+        ThePerson.executeChoices();*/
+        //getData();
+        //executeChoices();
     }
     
 }
