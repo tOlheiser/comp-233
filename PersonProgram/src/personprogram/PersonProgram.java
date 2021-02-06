@@ -6,6 +6,11 @@
 package personprogram;
 
 import java.util.Scanner;
+import java.io.File; // to read the file
+import java.io.FileNotFoundException; // to error check for file not found
+import java.util.NoSuchElementException; // 
+
+// io = input/output
 
 /**
  *
@@ -15,12 +20,14 @@ public class PersonProgram {
     // initialize instance variables
     public static Scanner input; 
     public static Person[] people; 
+    public Scanner fileReader; // scanner to read the file
     
     public PersonProgram() {
         // initialize the scanner
         input = new Scanner(System.in);
     }
     
+    // Method to grab array data
     public void getData() {
         // Declare and populate a Person array
         people = new Person[5];
@@ -29,6 +36,44 @@ public class PersonProgram {
         people[2] = new Person("Ketchum", "Ash", 'P', new Date(01,02,1994));
         people[3] = new Person("Labowski", "Big", 'Y', new Date(03,04,1980));
         people[4] = new Person("Newman", "Paul", 'K', new Date(04,05,1989));
+    }
+    
+    // Overload method to get data from a file
+    public void getData(String fileName) {
+        // there's a possibility that the filename doesn't exist. so we'll 'try' to open it
+        try {
+            // fileReader refers to scanner
+            fileReader = new Scanner(new File(fileName)); // pass fileName into the new File object
+        // exception type followed by the name we're assigning to the exception 'fnfe' to reference later
+        } catch (FileNotFoundException fnfe) { 
+            System.out.println("File Not Found");
+        } catch(Exception e) {
+            System.out.println("An unknown error has occured");
+        }
+        
+        try {
+            // takes in the '7' in the text file.
+            int size = fileReader.nextInt();
+            people = new Person[size];
+            
+            int index = 0;
+            
+            // read line by line the text file
+            while(fileReader.hasNext()) {
+                people[index] = new Person(fileReader.next(), fileReader.next(), fileReader.next().charAt(0), 
+                        new Date(fileReader.nextInt(),fileReader.nextInt(),fileReader.nextInt() ));
+                // increment to get next person
+                index++;
+            }
+        } catch (NoSuchElementException e) {
+            // if the file is empty or we read passed the end of file
+            System.out.println("File Format Error");
+        } catch (IllegalStateException ise) {
+            // if the file is deleted or clsoed before we have the chance to read from it
+            System.out.println("Reading Error");
+        }
+        
+        
     }
     
     public int showMenu() {
@@ -198,7 +243,7 @@ public class PersonProgram {
         // Create an instance of the PersonProgram
         PersonProgram ThePerson = new PersonProgram();
         // load the data then display the menu
-        ThePerson.getData();
+        ThePerson.getData("233PersonTestData.txt");
         ThePerson.executeChoices();
     }
     
